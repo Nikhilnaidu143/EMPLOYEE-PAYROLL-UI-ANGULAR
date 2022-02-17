@@ -16,28 +16,66 @@ export class AddEmployeePayrollComponent {
 
   employee: Employee = new Employee("", "", "", [], null, "", "");
 
-  ngOnInit(): void { 
+  ngOnInit(): void {
+    this.id = this.activatedRoute.snapshot.params['id'];
+    if (this.id != undefined) {
+      this.service.getById(this.id).subscribe(empData => {
+        let result: any = empData;
+        this.employee = result.data;
+        console.log("emp depts :- ", this.employee.department);
+      })
+    }
   }
 
   /** Saving data  */
   onSubmit() {
-    console.log("emp data :- ", this.employee);
-    this.service.postCall(this.employee).subscribe((result) => this.router.navigate(["/Home"]));
+    this.id = this.activatedRoute.snapshot.params['id'];
+    if (this.id === undefined) {
+      console.log("emp data :- ", this.employee);
+      this.service.postCall(this.employee).subscribe((result) => this.router.navigate(["/Home"]));
+    }
+    else {
+      console.log("emp data :- ", this.employee);
+      this.service.updateById(this.employee, this.id).subscribe((result) => this.router.navigate(["/Home"]));
+    }
   }
 
   /** Binding department value */
   getValue(value: string, $event) {
-    if ($event.currentTarget.checked) {
-      this.employee.department.push(value);
+    this.id = this.activatedRoute.snapshot.params['id'];
+    if (this.id === undefined) {
+      if ($event.currentTarget.checked) {
+        this.employee.department.push(value);
+      }
+      else {
+        this.employee.department.forEach((element, index) => {
+          if (element === value) {
+            this.employee.department.splice(index, 1);
+          }
+        });
+      }
+      console.log("final depts :- ", this.employee.department);
     }
     else {
-      this.employee.department.forEach((element, index) => {
-        if (element === value) {
-          this.employee.department.splice(index, 1);
+      if ($event.currentTarget.checked) {
+        if (this.employee.department.length > 0) {
+          this.employee.department.forEach((element, index) => {
+            if (value === element) {
+              this.employee.department.splice(index, 1);
+            }
+          });
         }
-      });
+        this.employee.department.push(value);
+      }
+      else {
+        this.employee.department.forEach((element, index) => {
+          if (element === value) {
+            this.employee.department.splice(index, 1);
+          }
+        });
+      }
+      console.log("final depts :- ", this.employee.department);
     }
-    console.log("final depts :- " , this.employee.department);
   }
 
   /** Name validation. */

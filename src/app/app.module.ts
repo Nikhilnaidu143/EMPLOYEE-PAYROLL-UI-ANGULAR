@@ -7,14 +7,12 @@ import { AddEmployeePayrollComponent } from './EmployeeComponent/add-employee-pa
 import { FormsModule } from '@angular/forms';
 import { HomePageComponent } from './EmployeeComponent/home-page/home-page.component';
 import { HttpClientModule } from '@angular/common/http';
-import { UpdateComponent } from './EmployeeComponent/update/update.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AddEmployeePayrollComponent,
     HomePageComponent,
-    UpdateComponent,
   ],
   imports: [
     BrowserModule,
