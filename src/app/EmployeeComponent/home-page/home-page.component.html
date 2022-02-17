@@ -1,0 +1,41 @@
+<div class="main-content">
+    <div class="header-content">
+        <div class="emp-detail-text">
+            Employee Details
+            <div class="emp-count">{{employees.data.length}}</div>
+        </div>
+        <a routerLink='/Add' class="add-button">
+            <img src="../assets/icons/add-24px.svg" alt="">ADD EMPLOYEE</a>
+    </div>
+    <div class="table-main">
+        <table id="table-display" class="table">
+            <tr>
+                <th>ID</th>
+                <th>Profile Picture</th>
+                <th>Name</th>
+                <th>Gender</th>
+                <th>Department</th>
+                <th>Salary</th>
+                <th>Start Date</th>
+                <th>Note</th>
+                <th>Actions</th>
+            </tr>
+            <tr *ngFor="let employee of employees.data">
+                <td>{{employee.employee_id}}</td>
+                <td>
+                    <img class="imageInHomePage" [src]="employee.profile_pic" alt="Image is missing">
+                </td>
+                <td>{{employee.employee_name}}</td>
+                <td>{{employee.gender}}</td>
+                <td class='dept-label'>{{employee.department}}</td>
+                <td>{{employee.salary}}</td>
+                <td>{{employee.start_date}}</td>
+                <td>{{employee.note}}</td>
+                <td>
+                    <img (click)="delete(employee.employee_id)" id="1" src="../assets/icons/delete-black-18dp.svg" alt="delete">
+                    <img (click)="update(employee.employee_id)" id="1" src="../assets/icons/create-black-18dp.svg" alt="edit">
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
