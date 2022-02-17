@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { element } from 'protractor';
 import { Employee } from 'src/app/Employee';
 import { EmployeePayrollService } from 'src/app/employee-payroll.service';
 
