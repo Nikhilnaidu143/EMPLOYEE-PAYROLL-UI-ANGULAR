@@ -30,7 +30,6 @@ export class AddEmployeePayrollComponent {
 
   /** Saving data  */
   onSubmit() {
-    this.id = this.activatedRoute.snapshot.params['id'];
     if (this.id === undefined) {
       console.log("emp data :- ", this.employee);
       this.service.postCall(this.employee).subscribe((result) => this.router.navigate(["/Home"]));

@@ -77,7 +77,8 @@
         <div class="buttonParent">
             <button class="cancel"><a routerLink='/Home' class="resetButton button cancelButton">Cancel</a></button>
             <div class="submit-reset">
-                <button type="submit" (click)="onSubmit()" class="button submitButton" id="submitButton">Submit</button>
+                <button type="submit" *ngIf="this.id === undefined" (click)="onSubmit()" class="button submitButton" id="submitButton">Submit</button>
+                <button type="submit" *ngIf="this.id !== undefined" (click)="onSubmit()" class="button submitButton" id="submitButton">Update</button>
                 <button type="reset" class="button resetButton" id="resetButton">Reset</button>
             </div>
         </div>
