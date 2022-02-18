@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { EmployeePayrollService } from 'src/app/employee-payroll.service';
+import { EmployeePayrollService } from 'src/app/service/employee-payroll.service';
 
 @Component({
   selector: 'app-home-page',

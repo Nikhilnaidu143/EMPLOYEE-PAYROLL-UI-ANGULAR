@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Employee } from 'src/app/Employee';
-import { EmployeePayrollService } from 'src/app/employee-payroll.service';
+import { Employee } from 'src/app/Model/Employee';
+import { EmployeePayrollService } from 'src/app/service/employee-payroll.service';
 
 @Component({
   selector: 'app-add-employee-payroll',
@@ -10,11 +10,12 @@ import { EmployeePayrollService } from 'src/app/employee-payroll.service';
 })
 export class AddEmployeePayrollComponent {
   nameError: string;
+  salaryError: string;
   id: number;
 
   constructor(private service: EmployeePayrollService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
-  employee: Employee = new Employee("", "", "", [], null, "", "");
+  employee: Employee = new Employee("", "", "", "", null, "", "");
 
   ngOnInit(): void {
     this.id = this.activatedRoute.snapshot.params['id'];
@@ -40,42 +41,10 @@ export class AddEmployeePayrollComponent {
     }
   }
 
-  /** Binding department value */
-  getValue(value: string, $event) {
-    this.id = this.activatedRoute.snapshot.params['id'];
-    if (this.id === undefined) {
-      if ($event.currentTarget.checked) {
-        this.employee.department.push(value);
-      }
-      else {
-        this.employee.department.forEach((element, index) => {
-          if (element === value) {
-            this.employee.department.splice(index, 1);
-          }
-        });
-      }
-      console.log("final depts :- ", this.employee.department);
-    }
-    else {
-      if ($event.currentTarget.checked) {
-        if (this.employee.department.length > 0) {
-          this.employee.department.forEach((element, index) => {
-            if (value === element) {
-              this.employee.department.splice(index, 1);
-            }
-          });
-        }
-        this.employee.department.push(value);
-      }
-      else {
-        this.employee.department.forEach((element, index) => {
-          if (element === value) {
-            this.employee.department.splice(index, 1);
-          }
-        });
-      }
-      console.log("final depts :- ", this.employee.department);
-    }
+  /** Binding department. */
+  getValue(value: String) {
+    this.employee.department = value;
+    console.log(this.employee.department);
   }
 
   /** Name validation. */
@@ -89,6 +58,16 @@ export class AddEmployeePayrollComponent {
     }
     else {
       return this.nameError = "Invalid name...!";
+    }
+  }
+
+  /** Salary validation. */
+  salaryValidation() {
+    if (this.employee.salary < 1000) {
+      return this.salaryError = "Salary must be greater than 1000.";
+    }
+    else {
+      return this.salaryError = " ";
     }
   }
 }
