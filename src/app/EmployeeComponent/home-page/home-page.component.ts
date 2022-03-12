@@ -25,7 +25,7 @@ export class HomePageComponent implements OnInit {
 
   /** Delete by id */
   delete(id: number) {
-    this.service.deleteCall(id).subscribe((result) => window.location.reload());
+    this.service.deleteCall(id).subscribe((result) => location.reload());
   }
 }
 

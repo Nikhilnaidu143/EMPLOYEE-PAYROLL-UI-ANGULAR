@@ -44,26 +44,15 @@
         </div>
         <div class="row-content">
             <label class="label-text" for="department">Department:-</label>
-            <div>
-                <input class="checkbox" type="checkbox" id="HR" value="HR" name="department1"
-                    [ngModel]="employee.department == 'HR'" (change)="getValue('HR')">
-                <label class="text" for="Hr">HR</label>
-                <input class="checkbox" type="checkbox" id="Sales" value="Sales" name="department2"
-                    [ngModel]="employee.department == 'Sales'" (change)="getValue('Sales')">
-                <label class="text" for="Sales">Sales</label>
-                <input class="checkbox" type="checkbox" id="Finance" value="Finance" name="department3"
-                    [ngModel]="employee.department == 'Finance'" (change)="getValue('Finance')">
-                <label class="text" for="finance">Finance</label>
-                <input class="checkbox" type="checkbox" id="Engineer" value="Engineer" name="department4"
-                    [ngModel]="employee.department == 'Engineer'" (change)="getValue('Engineer')">
-                <label class="text" for="engineer">Engineer</label>
+            <div *ngFor="let item of departmentList">
+                <input class="checkbox" id="{{item.name}}" type="checkbox" name="{{item.name}}" (change)="getDeptValue()" [(ngModel)]="item.isChecked">
+                <label for="{{item.name}}">{{item.name}}</label>
             </div>
         </div>
         <div class="row-content">
             <label class="label-text" for="salary">Salary:-</label>
-            <input type="text" class="input" id="salary" name="salary" [(ngModel)]="employee.salary" (input)="salaryValidation()"
-                placeholder="Enter your salary." required>
-            <span class="error-output">{{this.salaryError}}</span>
+            <input class="input" type="range" id="salary" name="salary" min="300000" max="500000" step="1000" [(ngModel)]="employee.salary">
+            <span>{{employee.salary}}</span>
         </div>
         <div class="row-content">
             <label class="label-text" for="StartDate">Start Date:-</label>
