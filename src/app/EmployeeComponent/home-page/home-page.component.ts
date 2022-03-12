@@ -5,7 +5,7 @@ import { EmployeePayrollService } from 'src/app/service/employee-payroll.service
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
-  styleUrls: ['./home-page.component.scss']
+  styleUrls: ['./home-page.component.scss'],
 })
 export class HomePageComponent implements OnInit {
   employees: any = [];
@@ -25,7 +25,7 @@ export class HomePageComponent implements OnInit {
 
   /** Delete by id */
   delete(id: number) {
-    this.service.deleteCall(id).subscribe((result) => location.reload());
+    this.service.deleteCall(id).subscribe((result) => this.ngOnInit());
   }
 }
 
